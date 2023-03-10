@@ -1,0 +1,37 @@
+.Profile{
+    .container{
+        display: flex;
+        gap: 20px;
+    }
+    .left-part{
+        flex: 2;
+    }
+    .right-part{
+        flex:1;   
+    }
+    .profile-card{
+        margin-top: 20px;
+        border: 1px solid var(--border-color);
+        text-align: center;
+        padding: 40px;
+        .user-image{
+            height: 90px; 
+            width: 80px;
+            border-radius: 50%;
+        }
+        .user-name,.follower-info{
+            margin-top: 12px;
+        }
+        .follower-info{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+        .follow-btn,.update-btn{
+            margin-top: 20px;
+            display: inline-block;
+        }
+    }
+   
+}
