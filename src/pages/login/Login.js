@@ -10,15 +10,19 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState('')
   const handleSubmit = async(e)=>{
     e.preventDefault();
+    try {
       const data = await axiosClient.post('/auth/login',{
         email,
         password
       })
-      console.log(data);
       setItem(KEY_ACCESS_TOKEN,data.result.accessToken);
       navigate('/')
+    } catch (e) {
+      setError(e);
+    } 
   }
   return (
     <div className='login'>
@@ -32,6 +36,7 @@ const Login = () => {
             <input type="submit" className='submit'/>
             </form>
             <p>Do You have an account?<Link to="/signup"> Sign Up</Link></p>
+            <p style={{color:'red'}}>{error?error+"*":""}</p>
         </div>
     </div>
   )

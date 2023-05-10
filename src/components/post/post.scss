@@ -8,9 +8,11 @@
     gap: 20px;
     height: 60px;
     padding: 20px;
+    cursor: pointer;
   }
   .content {
-    height: 400px;
+    width: 680px;
+    height: auto;
 
     img {
       width: 100%;
@@ -34,5 +36,6 @@
         margin-top: 12px;
         color: #aaa;
     }
+  
   }
 }

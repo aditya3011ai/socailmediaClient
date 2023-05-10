@@ -24,21 +24,22 @@ axiosClient.interceptors.response.use(
         const originalRequest = response.config;
         const status = data.statusCode;  
         const error = data.message;
-        if(status === 401 && originalRequest.url === `${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`){
-            removeItem(KEY_ACCESS_TOKEN);
-            window.location.replace('/login','_self')
-            return Promise.reject(error)
-        }
+
         if(status===401 && !originalRequest._retry){  
             originalRequest._retry = true;
+            
             const response = await axios.create({
                 withCredntials:true,
             }).get(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/refresh`)
+
             if(response.status==='ok'){
-                
                 setItem(KEY_ACCESS_TOKEN,response.result.accessToken)
                 originalRequest.headers['authorization'] = `Bearer ${response.result.accessToken}`;
                 return axios(originalRequest)
+            }else{
+                removeItem(KEY_ACCESS_TOKEN);
+                window.location.replace('/login','_self')
+                return Promise.reject(error)
             }
         }
         return Promise.reject(error)
