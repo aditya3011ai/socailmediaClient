@@ -1,14 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosClient } from "../../utils/axiosClient";
 import { likeAndUnlikePost } from "./postSlice";
-import { setLoading } from "./appConfig";
 
 export const getFeedData = createAsyncThunk(
     "user/getFeedData",
     async () => {
         try {
             const response = await axiosClient.get("/user/getFeedData");
-            console.log("userProfile", response);
             return response.result;
         } catch (error) {
             return Promise.reject(error);
@@ -44,7 +42,7 @@ const feedSlice = createSlice({
                 const index = state?.feedData?.posts?.findIndex(
                     (item) => item._id === post._id
                 );
-                console.log("feed like", post, index);
+
                 if (index !== undefined && index !== -1) {
                     state.feedData.posts[index] = post;
                 }

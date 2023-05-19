@@ -12,22 +12,22 @@ const Feed = () => {
 
   useEffect(() => {
     dispatch(getFeedData());
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="Feed">
         <div className="container">
           <div className="left-part">
-            {feedData?.posts?.map(post => <Post key={post._id} post={post} />)}
+            {feedData?.posts?.map(post => <Post className='hover-link' key={post._id} post={post} />)}
           </div>
           <div className="right-part">
             <div className="following">
-              <h3 className="title">You Are Following</h3>
-              {feedData?.followings?.map(user => <Follower key={user._id} user={user}/>)}
+              <h3 className="title hover-link">You Are Following</h3>
+              {feedData?.followings?.map(user => <Follower className='hover-link' key={user._id} user={user}/>)}
             </div>
             <div className="suggestions">
               <h3 className="title">Suggested For You</h3>
-              {feedData?.suggestions?.map(user => <Follower key={user._id} user={user}/>)}
+              {feedData?.suggestions?.map(user => <Follower className='hover-link' key={user._id} user={user}/>)}
             </div>
           </div>
         </div>

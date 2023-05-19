@@ -1,12 +1,13 @@
 import React ,{useState}from 'react'
 import { KEY_ACCESS_TOKEN,setItem } from '../../utils/localStorageManager'
 import { axiosClient } from '../../utils/axiosClient'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './signup.scss'
 const Signup = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
   const handleSubmit = async(e)=>{
     e.preventDefault();
       const data = await axiosClient.post('/auth/signup',{
@@ -14,8 +15,8 @@ const Signup = () => {
         email,
         password
       })
-      console.log(data);
       setItem(KEY_ACCESS_TOKEN,data.result.accessToken);
+      navigate('/')
   }
   return (
     <div className='signup'>

@@ -3,7 +3,6 @@ import Avatar from "../avatar/Avatar";
 import { BsCardImage } from "react-icons/bs";
 import { axiosClient } from "../../utils/axiosClient";
 import {useDispatch, useSelector} from 'react-redux';
-import { setLoading } from "../../redux/slices/appConfig";
 import { getUserProfile } from "../../redux/slices/postSlice";
 import './createpost.scss'
 
@@ -31,12 +30,10 @@ function CreatePost() {
             setRequire(false);
             return;
         }
-        dispatch(setLoading(true));
-            const result = await axiosClient.post('/posts', {
+            await axiosClient.post('/posts', {
                 title,
                 postImg
             })
-            console.log('post done', result);
             dispatch(getUserProfile({
                 userId: myProfile?._id
             }));
@@ -44,7 +41,6 @@ function CreatePost() {
             setTitle('');
             setPostImg('');
             setRequire(true);
-            dispatch(setLoading(false));
     }
 
     return (

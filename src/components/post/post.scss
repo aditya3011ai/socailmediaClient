@@ -9,6 +9,19 @@
     height: 60px;
     padding: 20px;
     cursor: pointer;
+    justify-content:space-between;
+    .left-part{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+    .delete-icon{
+      font-size: large;
+      color: #9c9c9c;
+      margin-right: 5px;
+      padding: 5px;
+    }
   }
   .content {
     width: 680px;

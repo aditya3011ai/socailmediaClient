@@ -4,12 +4,16 @@ import Img from '../../assets/user.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState,useEffect } from 'react'
 import { updateProfile } from '../../redux/slices/appConfig'
+import { deleteUser } from '../../redux/slices/appConfig'
+import { useNavigate } from 'react-router-dom'
+import { removeItem,KEY_ACCESS_TOKEN } from '../../utils/localStorageManager'
 const UpdateProfile = () => {
   const myProfile = useSelector(state=>state.appConfigReducer.myProfile);
   const [name, setName] = useState("")
   const [bio, setBio] = useState("")
   const [userImg, setUserImg] = useState(null)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     setName(myProfile?.name || "")
     setBio(myProfile?.bio || "")
@@ -32,6 +36,11 @@ const UpdateProfile = () => {
     name,bio,userImg
    }))
   }
+  const handleDeleteUser = ()=>{
+    dispatch(deleteUser())
+    removeItem(KEY_ACCESS_TOKEN);
+		navigate('/login')
+  }
   
   return (
     <div className='UpdateProfile'>
@@ -41,8 +50,8 @@ const UpdateProfile = () => {
                
                 <label htmlFor='input-img' className='lable-Img'>
               
-                <img src={userImg? userImg: Img} alt="User-Image" aria-label="" />
-               
+                <img src={userImg? userImg: Img} alt="User"  />
+                <div style={{color:'#66a3fd'}} className='hover-link change-img'>Change Profile</div>
                 </label>
                
                 <input id='input-img'className='inputImg' type='file' accept='image/*' onChange={handleImageChange} aria-label="" />
@@ -60,7 +69,7 @@ const UpdateProfile = () => {
                     type='text'/>
                     <input type='submit' className='primary-btn'/>
                 </form>
-                <button className='delete-account primary-btn'>Delete Profile</button>
+                <button className='delete-account primary-btn' onClick={handleDeleteUser}>Delete Profile</button>
             </div>
         </div>
     </div>

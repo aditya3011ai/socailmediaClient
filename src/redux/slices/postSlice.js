@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosClient } from "../../utils/axiosClient";
-import { setLoading } from "./appConfig";
+import { showToast } from "./appConfig";
+import { TOAST_SUCCESS } from "../../App";
  
 export const getUserProfile = createAsyncThunk(
     "user/getUserProfile",
@@ -10,7 +11,6 @@ export const getUserProfile = createAsyncThunk(
                 "/user/getUserProfile",
                 body
             );
-            console.log(response.result, "user pro");
             return response.result;
         } catch (error) {
             return Promise.reject(error);
@@ -29,7 +29,25 @@ export const likeAndUnlikePost = createAsyncThunk(
         } 
     }
 );
-
+export const deletePost = createAsyncThunk(
+    "post/deletePost",
+    async(body,thunkAPI)=>{
+        const result =await axiosClient.post('/posts/delete',body)
+        if(result){
+    
+        thunkAPI.dispatch(showToast({
+            type:TOAST_SUCCESS,
+            message:"Post Deleted"
+        }))
+        window.location.reload();
+    }else{
+            thunkAPI.dispatch(showToast({
+                type:TOAST_SUCCESS,
+                message:"Post Not Deleted"
+            }))   
+        }
+    }
+)
 const postsSlice = createSlice({
     name: "postsSlice",
     initialState: {
@@ -44,10 +62,9 @@ const postsSlice = createSlice({
                 const post = action.payload;
 
                 const index = state?.userProfile?.posts?.findIndex(
-                    (item) => item._id == post?._id
+                    (item) => item._id === post?._id
                 );
-                console.log("postslice", index);
-                if (index != undefined && index != -1) {
+                if (index !== undefined && index !== -1) {
                     state.userProfile.posts[index] = post;
                 }
             });

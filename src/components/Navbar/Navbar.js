@@ -1,24 +1,31 @@
 import React from "react";
 import { AiOutlineLogout } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {setLoading} from '../../redux/slices/appConfig'
+import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
+import { axiosClient } from "../../utils/axiosClient";
+import { removeItem } from "../../utils/localStorageManager";
 import Avatar from "../avatar/Avatar";
 import "./navbar.scss";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const myProfile = useSelector(state=>state.appConfigReducer.myProfile);
   
-  const handleLogout = ()=> {
-      dispatch(setLoading(true));  
+  const handleLogout =async ()=> {
+    try {
+			await axiosClient.post('/auth/logout');
+			removeItem(KEY_ACCESS_TOKEN);
+			navigate('/login')
+		} catch (e) {
+			
+		}
   }
   return (
     <div className="Navbar">
       <div className="container">
         <h1 className="banner hover-link" onClick={() => navigate("/")}>
-          Social Media
+          Digital Media
         </h1>
         <div className="right-side">
           <div

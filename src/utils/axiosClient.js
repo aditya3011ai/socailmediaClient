@@ -1,5 +1,8 @@
 import axios from 'axios'
 import { getItem, KEY_ACCESS_TOKEN, removeItem, setItem } from './localStorageManager';
+import store from '../redux/store';
+import { setLoading, showToast } from "../redux/slices/appConfig";
+import { TOAST_FAILURE } from "../App";
 
 export const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_SERVER_BASE_URL,
@@ -10,21 +13,26 @@ axiosClient.interceptors.request.use(
     (request)=>{
         const accessToken =getItem(KEY_ACCESS_TOKEN);
         request.headers["authorization"]=`Bearer ${accessToken}`
+        store.dispatch(setLoading(true));
         return request
     }
 )
 
-axiosClient.interceptors.response.use(
-    async(response)=>{
+axiosClient.interceptors.response.use(async(response)=>{
+        store.dispatch(setLoading(false));
         try {
         const data = response.data;
         if(data.status==="ok"){
             return data
         }
         const originalRequest = response.config;
-        const status = data.statusCode;  
+        const status = data.statusCode;
         const error = data.message;
-
+        store.dispatch(showToast({
+            type: TOAST_FAILURE,
+            message: error
+        }))
+    
         if(status===401 && !originalRequest._retry){  
             originalRequest._retry = true;
             
@@ -44,7 +52,12 @@ axiosClient.interceptors.response.use(
         }
         return Promise.reject(error)
     } catch (e) {
-            console.log(e);
+        store.dispatch(setLoading(false));
+        store.dispatch(showToast({
+            type: TOAST_FAILURE,
+            message: e.message
+        }))
+            return Promise.reject(e)
     }
     }
 )
