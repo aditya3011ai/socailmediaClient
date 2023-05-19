@@ -26,7 +26,7 @@ const Profile = () => {
       userId:params.userId,
     }));
     setIsMyProfile(myProfile?._id === params.userId);
-  },[myProfile, params,feedData,dispatch])
+  },[params,feedData,dispatch])
   const handleFollow = ()=>{
     dispatch(followAndUnfollowUser({
       userIdtoFollow: userProfile._id
