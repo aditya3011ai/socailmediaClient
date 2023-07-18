@@ -39,3 +39,17 @@
         cursor: pointer;
     }
 }
+@media screen and (max-width:400px) {
+    .signup{
+        height: 80vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .signup-box{
+            border: none;
+            min-width: 300px;
+        }
+    }
+    
+}

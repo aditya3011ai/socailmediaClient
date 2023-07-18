@@ -9,6 +9,7 @@
     .left-part {
         flex: 2;
         overflow-y: auto;
+       
     }
     .right-part {
         flex: 1;
@@ -23,3 +24,19 @@
         margin-bottom: 12px;
     }
 }
+@media screen and (max-width:789px) {
+    .Feed{
+      .container{
+        margin: 0;
+        gap: 28px;
+        flex-direction: column-reverse;
+        .left-part{
+            width: 100vw;
+        }
+        .right-part{
+           width: 80vw;
+           margin-left: 10vw;
+        }
+      }
+    }
+    }

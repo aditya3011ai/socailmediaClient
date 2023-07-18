@@ -18,7 +18,7 @@ const Feed = () => {
     <div className="Feed">
         <div className="container">
           <div className="left-part">
-            {feedData?.posts?.map(post => <Post className='hover-link' key={post._id} post={post} />)}
+            {feedData?.posts?.map(post => <Post className='hover-link post' key={post._id} post={post} />)}
           </div>
           <div className="right-part">
             <div className="following">
