@@ -2,6 +2,7 @@
     .container{
         display: flex;
         gap: 20px;
+        
     }
     .left-part{
         flex: 2;
@@ -38,4 +39,24 @@
         }
     }
    
+}
+@media screen and (max-width:789px) {
+    .Profile{
+        overflow: hidden;
+        .container{
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: center;
+            
+            .right-part{
+                justify-content: center;
+                .profile-card{
+                    width: 80vw;
+                }
+            }
+            .left-part{ 
+                
+            }
+        }
+    }
 }

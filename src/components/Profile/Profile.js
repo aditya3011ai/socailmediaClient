@@ -26,7 +26,7 @@ const Profile = () => {
       userId:params.userId,
     }));
     setIsMyProfile(myProfile?._id === params.userId);
-  },[params,feedData,dispatch])
+  },[feedData])
   const handleFollow = ()=>{
     dispatch(followAndUnfollowUser({
       userIdtoFollow: userProfile._id
@@ -37,7 +37,7 @@ const Profile = () => {
     <div className="Profile">
       <div className="container">
         <div className="left-part">
-        { isMyProfile && <CreatePost />}
+        { isMyProfile && <CreatePost className="create-post" />}
           {userProfile?.posts?.map((post) => (
                       <Post key={post._id} post={post} mypost={myProfile}/>
                       

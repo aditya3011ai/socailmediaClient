@@ -3,7 +3,7 @@
   .container {
     display: flex;
     padding-top: 20px;
-  }
+  
   .left-part {
     text-align: center;
     flex: 1;
@@ -51,6 +51,23 @@
         margin-top: 16px;
         background-color: red;
         padding:10px 15px;
+    }
+  }
+}
+}
+@media screen and (max-width:400px) {
+  .UpdateProfile {
+    .container{
+      flex-direction: column;
+      .right-part{
+        form{
+        border: none;
+        }
+        .delete-account{
+          margin: 0;
+          margin-left: 20px;
+        }
+      }
     }
   }
 }

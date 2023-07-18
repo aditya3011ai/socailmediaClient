@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { getUserProfile } from "../../redux/slices/postSlice";
 import './createpost.scss'
 
-function CreatePost() {
+const CreatePost=()=> {
     const [postImg, setPostImg] = useState("");
     const [title, setTitle] = useState('')
     const [require, setRequire] = useState(true)

@@ -25,3 +25,18 @@
     }
   
 }
+@media  screen and (max-width:500px) {
+  .Navbar{
+    .container{
+      h1{
+        font-size: 25px;
+      }
+    }
+    .right-side {
+      gap: 10px;
+      .logout {
+        font-size: 28px;
+      }
+    }
+  }
+}
