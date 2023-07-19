@@ -10,14 +10,14 @@
     height: 60px;
     padding: 20px;
     cursor: pointer;
-    justify-content:space-between;
-    .left-part{
+    justify-content: space-between;
+    .left-part {
       display: flex;
       align-items: center;
       gap: 10px;
       overflow: hidden;
     }
-    .delete-icon{
+    .delete-icon {
       font-size: large;
       color: #9c9c9c;
       margin-right: 5px;
@@ -38,17 +38,17 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      .icon{
+      .icon {
         font-size: 1.5rem;
       }
     }
-    .caption{
-        margin-top: 12px;
+    .caption {
+      font-weight: 700;
+      margin-top: 12px;
     }
-    .time-ago{
-        margin-top: 12px;
-        color: #aaa;
+    .time-ago {
+      margin-top: 12px;
+      color: #aaa;
     }
-  
   }
 }

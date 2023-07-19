@@ -25,7 +25,9 @@ const Profile = () => {
     dispatch(getUserProfile({
       userId:params.userId,
     }));
-    setIsMyProfile(myProfile?._id === params?.userId);
+    const isprofile = myProfile?._id === params?.userId
+    setIsMyProfile(isprofile);
+    // eslint-disable-next-line
   },[feedData])
   const handleFollow = ()=>{
     dispatch(followAndUnfollowUser({
@@ -49,6 +51,7 @@ const Profile = () => {
           <div className="profile-card">
             <img className="user-image" src={userProfile?.avatar?.url ? userProfile?.avatar?.url:Img} alt="user" />
             <h3 className='user-name'>{userProfile?.name}</h3>
+            <h3 className='user-bio'>{userProfile?.bio}</h3>
             <div className="follower-info">
               <h4>{`${userProfile?.followers?.length} Followers`}</h4>
               <h4>{`${userProfile?.followings?.length} Followings`}</h4>
